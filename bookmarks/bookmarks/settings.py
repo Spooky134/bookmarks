@@ -14,8 +14,12 @@ SECRET_KEY = 'django-insecure-xtteaqh$%p_2f_df69+qr#wmluu0=v03j^tr&*^bycahh1^tcq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com',
+                 'localhost',
+                 '127.0.0.1',
+                 '0b7e-46-216-152-104.eu.ngrok.io']
 
+CSRF_TRUSTED_ORIGINS = ['https://0b7e-46-216-152-104.eu.ngrok.io']
 
 # Application definition
 
@@ -27,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +128,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2260437064159520'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'de16fd9089ded78fe6254a40095f7c55'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '685579840871-jtbmmp7asfa50seqh47uuu907njsmvdn.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
