@@ -11,15 +11,15 @@ class Image(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, blank=True)
     url = models.URLField()
-    image = models.ImageField(upload_to=f'images/%Y/%m/%d/')
+    image = models.ImageField(upload_to='images/%Y/%m/%d/')
     description = models.TextField(blank=True)
     created = models.DateField(auto_now_add=True, db_index=True)
-    user_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
+    users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='images_liked',
                                         blank=True)
 
     def __str__(self):
-        return super().__str__()
+        return self.title
 
     def save(self, *args, **kwargs):
         if not self.slug:
